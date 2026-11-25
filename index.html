@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skycast – Weather App</title>
+  <meta name="description" content="Skycast: search any city, see current weather, hourly chart, 7-day forecast, air quality and saved cities. Vanilla JavaScript + Open-Meteo." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231d4ed8'/%3E%3Cstop offset='1' stop-color='%2338bdf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url%28%23g%29'/%3E%3Ctext x='32' y='43' font-family='Arial%2CHelvetica%2Csans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='white'%3EAE%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-sky="clear-day">
+  <div class="sky" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#/today" aria-label="Skycast home">
+      <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><circle cx="26" cy="26" r="12" fill="#fdb813"/><path d="M20 50h28a10 10 0 0 0 1-19.9A15 15 0 0 0 21 33a8.5 8.5 0 0 0-1 17z" fill="#fff"/></svg>
+      <span>Skycast</span>
+    </a>
+    <span class="by-tag">by Alaa Emad</span>
+
+    <form id="search-form" class="search" role="search" autocomplete="off">
+      <label for="city-input" class="sr-only">Search city</label>
+      <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4"/></svg>
+      <input id="city-input" type="search" placeholder="Search city…" aria-autocomplete="list" aria-controls="suggestions" />
+      <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+    </form>
+
+    <div class="actions">
+      <button id="locate-btn" class="icon-btn" type="button" title="Use my location" aria-label="Use my location">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v3m0 14v3M2 12h3m14 0h3M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+      </button>
+      <button id="unit-btn" class="pill-btn" type="button" title="Switch units" aria-label="Switch between metric and imperial units">°C</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Views">
+    <a href="#/today" data-route="today">Today</a>
+    <a href="#/forecast" data-route="forecast">7 days</a>
+    <a href="#/details" data-route="details">Details</a>
+    <a href="#/saved" data-route="saved">Saved</a>
+  </nav>
+
+  <main id="view" class="view" aria-live="polite"></main>
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <footer class="footer"><a class="made-by" href="https://github.com/alaa-emad-dev" target="_blank" rel="noopener"><span class="ae-badge" aria-hidden="true">AE</span> Made by <strong>Alaa Emad</strong></a><br />Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Built with vanilla JavaScript</footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
